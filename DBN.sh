@@ -45,7 +45,6 @@ do
 	if [ "$STATE" -eq 1 ]; then
 		if [ "$PCT" -le 20 ]; then
 			notify-send --app-name "ATTENTION!!!" -t 2000 -u normal "Battery Low. Plug the Charger!"
-			#play "/home/dux/Music/SFX/Low Battery SFX.mp3"
 			play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
 		fi
 	elif [ "$STATE" -eq 0 ]; then
