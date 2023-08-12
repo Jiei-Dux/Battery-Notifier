@@ -13,16 +13,16 @@ Unfortunately, it wasn't good enough and I couldn't figure out how to make it do
 
 > ie. notify me to unplug the charger at certain threshold / level, etc.
 
-and since I was bored, I decided to make one myself. So here it is... Im not a very creative person so Im just calling this thing Dux-Battery-Notifier...
+, so I tried searching around internet for a script that works the way I wanted to, unfortunately, none worked, so I thought to myself
+
+> Why don't I just make one myself?
+and so I did... and here it is... Im not a very creative person so I'm just going to call this thing Dux-Battery-Notifier...
 
 <br>
 <br>
 
 **FUTURE PLANS:**
 * [x] ~~Should work across distros~~
-* [ ] Checking of required packages
-* [ ] Checking of required packages across distros
-* [ ] More to come... maybe...
 
 > NOTE:
 > I am fairly new to Linux ( started around March 2023), and Im ( as of August 2023 ) an Irregular College student, I dont know what year I am now actually but yeah...
