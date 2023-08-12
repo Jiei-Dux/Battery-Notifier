@@ -1,6 +1,6 @@
 # Battery-Notifier
 
-**TLDR:**
+**REASON WHY I MADE THIS:**
 
 Someone recommended that I:
 > keep the battery at 20% to 85% to avoid degrading my laptop battery.
@@ -17,6 +17,15 @@ Unfortunately, it wasn't good enough and I couldn't figure out how to make it do
 
 > Why don't I just make one myself?
 and so I did... and here it is... Im not a very creative person so I'm just going to call this thing Dux-Battery-Notifier...
+
+<br>
+<br>
+
+**REQUIRED PACKAGES:**
+* Upower
+
+**OPTIONAL PACKAGES**
+* Sound Exchange / sox
 
 <br>
 <br>
