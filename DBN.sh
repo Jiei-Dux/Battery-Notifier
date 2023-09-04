@@ -45,12 +45,12 @@ do
 	if [ "$STATE" -eq 1 ]; then
 		if [ "$PCT" -le 20 ]; then
 			notify-send --app-name "ATTENTION!!!" -t 2000 -u normal "Battery Low. Plug the Charger!"
-			# play "<SOUND FILE HERE>"
+			play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
 		fi
 	elif [ "$STATE" -eq 0 ]; then
 		if [ "$PCT" -ge 85 ]; then
 			notify-send --app-name "ATTENTION!!!" -t 2000 -u normal "Battery Full. Unplug the Charger!"
-			# play "<SOUND FILE HERE>"
+			play "/usr/share/sounds/Niko\ Niko\ Nii\ SFX.ogg"
 		fi
 	fi
 	
