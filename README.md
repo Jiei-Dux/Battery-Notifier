@@ -1,5 +1,3 @@
-theme: modernist
-
 # Battery-Notifier
 
 **REASON WHY I MADE THIS:**
