@@ -19,7 +19,9 @@ while true
 do
 	# ~ YOU CAN EDIT THE CODE BELOW ~ #
 
-	# NOTE: you can check your device name using "upower -d" #
+	# NOTE:
+ # you can check your device name using "upower -d"
+ # as well as use "*" if you're too lazy.
 	DEVICE_NAME='battery_BAT1'
 	
 	# ~ YOU CAN EDIT THE CODE ABOVE ~ #
