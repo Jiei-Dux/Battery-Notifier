@@ -22,7 +22,7 @@ and so I did... and here it is... Im not a very creative person so I'm just goin
 <br>
 
 **REQUIRED PACKAGES:**
-* Upower
+* UPower
 
 **OPTIONAL PACKAGES**
 * Sound Exchange / sox
