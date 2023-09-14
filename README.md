@@ -3,7 +3,7 @@
 **REASON WHY I MADE THIS:**
 
 Someone recommended that I:
-> keep the battery at 20% to 85% to avoid degrading my laptop battery.
+> keep the battery at 20% to 85% to avoid degrading my laptop battery or at least make it last longer.
 
 KDE already has a built-in battery notifier that can do a lot of things that I want.
 
