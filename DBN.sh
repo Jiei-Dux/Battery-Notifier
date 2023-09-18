@@ -16,29 +16,29 @@ done
 
 while true
 do
-    # ~ YOU CAN EDIT THE CODE BELOW ~ #
+  # ~ YOU CAN EDIT THE CODE BELOW ~ #
 
-    # NOTE:
-    # you can check your device name using "upower -d"
-    # as well as use "*" if you're too lazy.
-    DEVICE_NAME='battery_BAT1'
+  # NOTE:
+  # you can check your device name using "upower -d"
+  # as well as use "*" if you're too lazy.
+  DEVICE_NAME='battery_BAT1'
 	
-    # ~ YOU CAN EDIT THE CODE ABOVE ~ #
+  # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
 
 
 	
-    # || WARNING: DO NOT EDIT THE CODE BELOW || #
+  # || WARNING: DO NOT EDIT THE CODE BELOW || #
 	
-	LOCATION='/org/freedesktop/UPower/devices'
-	DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
+  LOCATION='/org/freedesktop/UPower/devices'
+  DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
 	
-	CMD=$(upower -i "$DEVICE_LOCATION")
+  CMD=$(upower -i "$DEVICE_LOCATION")
 	
-	PCT=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
-	STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
+  PCT=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
+  STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
 	
-	# || WARNING: DO NOT EDIT THE CODE ABOVE || #
+  # || WARNING: DO NOT EDIT THE CODE ABOVE || #
 
 
 
@@ -53,5 +53,5 @@ do
 	  play "/usr/share/sounds/Niko\ Niko\ Nii\ SFX.ogg"
   fi
 	
-	sleep 10
+  sleep 10
 done
