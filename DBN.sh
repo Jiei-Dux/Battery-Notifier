@@ -4,10 +4,9 @@
 
 for pid in $(pgrep -f $0);
 do
-	if [ $pid != $$ ]; 
-	then
-		kill $pid
-	fi
+  if [ $pid != $$ ]; then
+    kill $pid
+  fi
 done
 
 # || WARNING: THE CODE ABOVE KILLS DUPLICATE INSTANCES || #
@@ -17,19 +16,19 @@ done
 
 while true
 do
-	# ~ YOU CAN EDIT THE CODE BELOW ~ #
+    # ~ YOU CAN EDIT THE CODE BELOW ~ #
 
-	# NOTE:
-  # you can check your device name using "upower -d"
-  # as well as use "*" if you're too lazy.
-	DEVICE_NAME='battery_BAT1'
+    # NOTE:
+    # you can check your device name using "upower -d"
+    # as well as use "*" if you're too lazy.
+    DEVICE_NAME='battery_BAT1'
 	
-	# ~ YOU CAN EDIT THE CODE ABOVE ~ #
+    # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
 
 
 	
-	# || WARNING: DO NOT EDIT THE CODE BELOW || #
+    # || WARNING: DO NOT EDIT THE CODE BELOW || #
 	
 	LOCATION='/org/freedesktop/UPower/devices'
 	DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
