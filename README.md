@@ -16,7 +16,7 @@ Unfortunately, it wasn't good enough and I couldn't figure out how to make it do
 so I tried searching around internet for a script that works the way I wanted to, unfortunately, none worked, so I thought to myself
 
 > Why don't I just make one myself?
-and so I did... and here it is... Im not a very creative person so I'm just going to call this thing Dux-Battery-Notifier...
+and so I did... and here it is... Im not a very creative person so I'm just going to call this thing Battery-Notifier...
 
 <br>
 <br>
