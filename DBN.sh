@@ -50,7 +50,7 @@ do
 
   if [[ "$STATE" -eq 0 && "$PCT" -ge 85 ]]; then
     notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "Battery Full. Unplug the Charger!"
-	  play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
+	play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
 	
   sleep 10
