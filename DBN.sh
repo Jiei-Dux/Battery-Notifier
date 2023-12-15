@@ -43,6 +43,10 @@ do
 
 
 
+  if [[ "$STATE" -eq 1 && "$PCT" -le 10 ]]; then
+    systemctl suspend
+  fi
+
   if [[ "$STATE" -eq 1 && "$PCT" -le 20 ]]; then
     notify-send --app-name "Dux's Battery Notfier" -t 2000 -u normal "Battery Low. Plug the Charger!"
     play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
