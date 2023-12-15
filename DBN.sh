@@ -22,22 +22,22 @@ do
   # you can check your device name using "upower -d"
   # as well as use "*" if you're too lazy.
   DEVICE_NAME='battery_BAT1'
-	
+
   # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
 
 
-	
+
   # || WARNING: DO NOT EDIT THE CODE BELOW || #
-	
+
   LOCATION='/org/freedesktop/UPower/devices'
   DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
-	
+
   CMD=$(upower -i "$DEVICE_LOCATION")
-	
+
   PCT=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
   STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
-	
+
   # || WARNING: DO NOT EDIT THE CODE ABOVE || #
 
 
@@ -50,8 +50,8 @@ do
 
   if [[ "$STATE" -eq 0 && "$PCT" -ge 85 ]]; then
     notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "Battery Full. Unplug the Charger!"
-	play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
+    play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
-	
+
   sleep 10
 done
