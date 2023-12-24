@@ -1,4 +1,4 @@
-s#! /bin/bash
+#! /bin/bash
 
 # || WARNING: THE CODE BELOW KILLS DUPLICATE INSTANCES || #
 
