@@ -37,6 +37,8 @@ CRIT_BATTERY_THRESHOLD=10
 while true
 do
 
+  # * Variables Below * #
+  # ------------------- #
   LOCATION='/org/freedesktop/UPower/devices'
   DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
   CMD=$(upower -i "$DEVICE_LOCATION")
@@ -44,9 +46,10 @@ do
   BATTERY_PERCENTAGE=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
   STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
 
-
-
   NOTIF=$(notify-send --app-name "Dux's Battery Notfier" -t 2000 -u normal)
+
+  # * Variables Above * #
+
 
 
 
@@ -55,12 +58,12 @@ do
   fi
 
   if [[ "$STATE" -eq 1 && "$BATTERY_PERCENTAGE" -le "$LOW_BATTERY_THRESHOLD" ]]; then
-    notify-send --app-name "Dux's Battery Notfier" -t 2000 -u normal "Battery Low. Plug the Charger!"
+    "$NOTIF" "Battery Low. Plug the Charger!"
     play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
   fi
 
   if [[ "$STATE" -eq 0 && "$BATTERY_PERCENTAGE" -ge "$FULL_BATTERY_THRESHOLD" ]]; then
-    notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "Battery Full. Unplug the Charger!"
+    "$NOTIF" "Battery Full. Unplug the Charger!"
     play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
 
