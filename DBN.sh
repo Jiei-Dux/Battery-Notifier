@@ -23,9 +23,9 @@ done
 # Configuration:
 DEVICE_NAME='battery_BAT1'
 
-FULL_BATTERY_THRESHOLD=85
 LOW_BATTERY_THRESHOLD=20
 CRIT_BATTERY_THRESHOLD=10
+FULL_BATTERY_THRESHOLD=85
 
 # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
@@ -38,7 +38,7 @@ while true
 do
 
   # * Variables Below * #
-  # ------------------- #
+
   LOCATION='/org/freedesktop/UPower/devices'
   DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
   CMD=$(upower -i "$DEVICE_LOCATION")
