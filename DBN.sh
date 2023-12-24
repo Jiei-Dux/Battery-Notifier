@@ -1,4 +1,4 @@
-#! /bin/bash
+s#! /bin/bash
 
 # || WARNING: THE CODE BELOW KILLS DUPLICATE INSTANCES || #
 
@@ -44,6 +44,9 @@ do
   BATTERY_PERCENTAGE=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
   STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
 
+
+
+  NOTIF=$(notify-send --app-name "Dux's Battery Notfier" -t 2000 -u normal)
 
 
 
