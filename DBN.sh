@@ -16,13 +16,7 @@ done
 
 # ~ YOU CAN EDIT THE CODE BELOW ~ #
 
-# NOTE:
-# you can check your device name using "upower -d"
-# as well as use "*" if you're too lazy.
-#
-# Configuration:
-DEVICE_NAME='battery_BAT1'
-
+# THRESHOLDS:
 LOW_BATTERY_THRESHOLD=20
 CRIT_BATTERY_THRESHOLD=10
 FULL_BATTERY_THRESHOLD=85
@@ -39,31 +33,27 @@ do
 
   # * Variables Below * #
 
-  LOCATION='/org/freedesktop/UPower/devices'
-  DEVICE_LOCATION="$LOCATION/$DEVICE_NAME"
-  CMD=$(upower -i "$DEVICE_LOCATION")
+  BATTERY_PERCENTAGE=$(cat /sys/class/power_supply/*/capacity)
+  STATE=$(cat /sys/class/power_supply/BAT1/status)
 
-  BATTERY_PERCENTAGE=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
-  STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
-
-  NOTIF=$(notify-send --app-name "Dux's Battery Notfier" -t 2000 -u normal)
+  NOTIF() { notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "$1" }
 
   # * Variables Above * #
 
 
 
 
-  if [[ "$STATE" -eq 1 && "$BATTERY_PERCENTAGE" -le "$CRIT_BATTERY_THRESHOLD" ]]; then
+  if [[ $STATE -eq 1 && $BATTERY_PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
     systemctl suspend
   fi
 
-  if [[ "$STATE" -eq 1 && "$BATTERY_PERCENTAGE" -le "$LOW_BATTERY_THRESHOLD" ]]; then
-    "$NOTIF" "Battery Low. Plug the Charger!"
+  if [[ $STATE -eq 1 && $BATTERY_PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
+    NOTIF "Battery Low. Plug the Charger!"
     play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
   fi
 
-  if [[ "$STATE" -eq 0 && "$BATTERY_PERCENTAGE" -ge "$FULL_BATTERY_THRESHOLD" ]]; then
-    "$NOTIF" "Battery Full. Unplug the Charger!"
+  if [[ $STATE -eq 0 && $BATTERY_PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
+    NOTIF "Battery Full. Unplug the Charger!"
     play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
 
