@@ -42,9 +42,9 @@ and so I did... and here it is... Im not a very creative person so I'm just goin
 
 * [ ] <b>User Interaction</b> - I kind of want to make my script interactable through the terminal... because you know... why not?
 
-* [ ] <b>Dependency Checks</b> - I really should do this next... make the script check if these things are installed on the system before trying to use them... Like check for the packages and libraries for the first time or at the start atleast...
+* [x] <b>Dependency Checks</b> - I really should do this next... make the script check if these things are installed on the system before trying to use them... Like check for the packages and libraries for the first time or at the start atleast...
 
-* [ ] <b>Error Handling</b> - Just some experiments :)
+* [x] <b>Error Handling</b> - Just some experiments :)
 
 * [ ] <b>Custom Actions</b> - I kind of wanted to add this one also, like, this thing should enable the users to add their very own custom actions. Lets say for example, a user wanted to make the script do this and that when their battery is low instead of doing the default thing... know what I mean?
 
