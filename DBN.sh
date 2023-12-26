@@ -78,16 +78,16 @@ fi
 while true
 do
 
-  if [[ $STATE -eq 1 && $PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
+  if [[ $STATE -eq "Charging" && $PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
     systemctl suspend
   fi
 
-  if [[ $STATE -eq 1 && $PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
+  if [[ $STATE -eq "Charging" && $PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
     sendNotification "Battery Low. Plug the Charger!"
     play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
   fi
 
-  if [[ $STATE -eq 0 && $PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
+  if [[ $STATE -eq "Discharging" && $PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
     sendNotification "Battery Full. Unplug the Charger!"
     play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
