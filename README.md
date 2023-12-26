@@ -22,7 +22,7 @@ and so I did... and here it is... Im not a very creative person so I'm just goin
 <br>
 
 **REQUIRED PACKAGES:**
-* UPower / upower
+* UPower / upower (This one might go away from my script soon...)
 * Libnotify / libnotify
 
 **OPTIONAL PACKAGES**
