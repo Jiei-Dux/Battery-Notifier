@@ -19,7 +19,7 @@ done
 # THRESHOLDS:
 LOW_BATTERY_THRESHOLD=20
 CRIT_BATTERY_THRESHOLD=10
-FULL_BATTERY_THRESHOLD=85
+FULL_BATTERY_THRESHOLD=80
 
 # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
@@ -32,7 +32,6 @@ BATTERY_PATH="/sys/class/power_supply/*/capacity"
 STATUS_PATH="/sys/class/power_supply/*/status"
 
 PERCENTAGE=$(cat $BATTERY_PATH)
-STATE=$(cat $STATUS_PATH)
 
 sendNotification() {
   notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "$1"
@@ -78,16 +77,25 @@ fi
 while true
 do
 
-  if [[ $STATE -eq "Charging" && $PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
+  STATE=1
+
+  if grep -q "Discharging" $STATUS_PATH; then
+    STATE=0
+  fi
+
+
+
+
+  if [[ $STATE -eq 0 && $PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
     systemctl suspend
   fi
 
-  if [[ $STATE -eq "Charging" && $PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
+  if [[ $STATE -eq 0 && $PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
     sendNotification "Battery Low. Plug the Charger!"
     play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
   fi
 
-  if [[ $STATE -eq "Discharging" && $PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
+  if [[ $STATE -eq 1 && $PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
     sendNotification "Battery Full. Unplug the Charger!"
     play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
   fi
