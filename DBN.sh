@@ -83,6 +83,8 @@ do
     STATE=0
   fi
 
+  echo "STATE: " $STATE
+
 
 
 
