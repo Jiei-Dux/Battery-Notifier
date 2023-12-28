@@ -19,7 +19,7 @@ done
 # THRESHOLDS:
 LOW_BATTERY_THRESHOLD=20
 CRIT_BATTERY_THRESHOLD=10
-FULL_BATTERY_THRESHOLD=80
+FULL_BATTERY_THRESHOLD=85
 
 # ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
@@ -49,9 +49,21 @@ debugNotification() {
 
 
 
+# || WARNING: DEBUGGING SECTION BELOW || #
+
 #debugNotification "Script is now working..."
+
 #debugNotification "Battery Capacity: $PERCENTAGE"
 #debugNotification "Battery Status: $STATUS"
+
+:<<COMMENT
+while true
+do
+
+done
+COMMENT
+
+# || WARNING: DEBUGGING SECTION ABOVE || #
 
 
 
@@ -91,10 +103,12 @@ fi
 while true
 do
 
-  STATE=1
-
   if grep -q "Discharging" $STATUS_PATH; then
     STATE=0
+  fi
+
+  if grep -q "Charging" $STATUS_PATH; then
+    STATE=1
   fi
 
   #echo "STATE: $STATE"
