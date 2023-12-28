@@ -34,7 +34,7 @@ and so I did... and here it is... Im not a very creative person so I'm just goin
 **FUTURE PLANS:**
 * [x] ~~Should work across distros~~
 
-* [x] <b>Debugging Capabilities</b> - Its in the title... :3
+* [x] <b>Some Debugging Capabilities</b> - Its in the title... :3
 
 * [ ] <b>Logging</b> - I wanted to add some logging functionality to this script just to keep a record of the batery status changes, notifications, and script activities. This can help me with stuff like, troubleshooting issues, tracking my laptop's, or another user's laptop's battery performance history.
 
