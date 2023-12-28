@@ -28,16 +28,30 @@ FULL_BATTERY_THRESHOLD=80
 
 # * Variables Below * #
 
-BATTERY_PATH="/sys/class/power_supply/*/capacity"
-STATUS_PATH="/sys/class/power_supply/*/status"
+BATTERY_DIR="/sys/class/power_supply/*"
+
+BATTERY_PATH="$BATTERY_DIR/capacity"
+STATUS_PATH="$BATTERY_DIR/status"
 
 PERCENTAGE=$(cat $BATTERY_PATH)
+STATUS=$(cat $STATUS_PATH)
 
 sendNotification() {
   notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "$1"
 }
 
+debugNotification() {
+  notify-send --app-name "Debug" -t 4000 -u normal "$1"
+}
+
 # * Variables Above * #
+
+
+
+
+#debugNotification "Script is now working..."
+#debugNotification "Battery Capacity: $PERCENTAGE"
+#debugNotification "Battery Status: $STATUS"
 
 
 
@@ -83,7 +97,8 @@ do
     STATE=0
   fi
 
-  echo "STATE: " $STATE
+  #echo "STATE: $STATE"
+  #debugNotification "STATE: $STATUS"
 
 
 
