@@ -14,61 +14,83 @@ done
 
 
 
-# ~ YOU CAN EDIT THE CODE BELOW ~ #
-
-# THRESHOLDS:
-LOW_BATTERY_THRESHOLD=20
-CRIT_BATTERY_THRESHOLD=10
-FULL_BATTERY_THRESHOLD=85
-
-# ~ YOU CAN EDIT THE CODE ABOVE ~ #
 
 
 
 
-# * Variables Below * #
+# THRESHOLDS #
 
-BATTERY_DIR="/sys/class/power_supply/*"
+critical_battery_threshold=15
+low_battery_threshold=25
+full_battery_threshold=85
 
-BATTERY_PATH="$BATTERY_DIR/capacity"
-STATUS_PATH="$BATTERY_DIR/status"
+# THRESHOLDS #
 
-PERCENTAGE=$(cat $BATTERY_PATH)
-STATUS=$(cat $STATUS_PATH)
+
+
+
+
+
+
+
+# || WARNING: DO NOT EDIT THE CODE BELOW || #
+
+# VARIABLES #
+
+LOG_FILE="/home/*/.log/battery-notifier/battery_notifier_log.txt"
 
 sendNotification() {
-  notify-send --app-name "Dux's Battery Notifier" -t 2000 -u normal "$1"
+  notify-send --app-name "DBN - Dux's Battery Notifier" -t 4000 -u normal "$1"
 }
 
 debugNotification() {
-  notify-send --app-name "Debug" -t 4000 -u normal "$1"
+  notify-send --app-name "Debug Notif" -t 4000 -u normal "$1"
 }
 
-# * Variables Above * #
+logMessage() {
+  echo "$(date '+%Y-%m-%d %I:%M:%S') $1" >> $LOG_FILE
+}
+
+# sendNotification "YEET"
+# debugNotification "YEET"
+
+# logMessage "YEET"
+# cat $LOG_FILE
 
 
 
 
-# || WARNING: DEBUGGING SECTION BELOW || #
+SOUND_FILE_LOCATION="/usr/share/sounds/"
 
-#debugNotification "Script is now working..."
+# play $SOUND_FILE_LOCATION/Oxygen-Sys-App-Error-Serious.ogg
+# play $SOUND_FILE_LOCATION/Niko-Niko-Nii-SFX.ogg
 
-#debugNotification "Battery Capacity: $PERCENTAGE"
-#debugNotification "Battery Status: $STATUS"
 
-:<<COMMENT
-while true
-do
 
-done
-COMMENT
 
-# || WARNING: DEBUGGING SECTION ABOVE || #
+DEVICE_NAME=$(upower -e | grep 'battery' | sed 's/.*\/\(.*\)$/\1/')
+
+LOCATION='/org/freedesktop/UPower/devices'
+BAT_LOCATION="$LOCATION/$DEVICE_NAME"
+
+CMD=$(upower -i "$BAT_LOCATION")
+
+PCT=$(awk '{gsub("%","")} /percentage/ {printf "%s\n", $NF}' <<< "$CMD")
+STATE=$(awk '/state/ {print $NF}' <<< "$CMD" | grep -c "discharging")
+
+# echo $DEVICE_NAME
+# echo $BAT_LOCATION
+# echo $CMD
+# echo $PCT
+# echo $STATE
+
+# VARIABLES #
 
 
 
 
 # || WARNING: THE CODES BELOW HANDLES ERRORS || #
+#:<<COMMENT
 
 if ! command -v play &> /dev/null; then
   sendNotification "Error: 'play' command cannot be found... :3"
@@ -80,58 +102,38 @@ if ! command -v systemctl &> /dev/null; then
   exit 1
 fi
 
-
-
-
-if [ ! -r $BATTERY_PATH ]; then
-  sendNotification "Error: Cannot read battery capacity file... :3"
+if ! command -v upower &> /dev/null; then
+  sendNotification "Error: 'upower' command cannot be found... :3"
   exit 1
 fi
 
-if [ ! -r $STATUS_PATH ]; then
-  sendNotification "Error: Cannot read battery status file... :3"
-  exit 1
-fi
-
-# || WARNING: THE CODES ABOVE HANDLES ERRORS || #
+# || WARNING: DO NOT EDIT THE CODE ABOVE || #
 
 
 
 
-# || WARNING: DO NOT EDIT THE CODE BELOW || #
 
+
+
+
+:<<COMMENT
 while true
 do
 
-  if grep -q "Discharging" $STATUS_PATH; then
-    STATE=0
-  fi
-
-  if grep -q "Charging" $STATUS_PATH; then
-    STATE=1
-  fi
-
-  #echo "STATE: $STATE"
-  #debugNotification "STATE: $STATUS"
-
-
-
-
-  if [[ $STATE -eq 0 && $PERCENTAGE -le $CRIT_BATTERY_THRESHOLD ]]; then
+  if [[ "$STATE" -eq 1 && "$PCT" -le $CBT ]]; then
     systemctl suspend
   fi
 
-  if [[ $STATE -eq 0 && $PERCENTAGE -le $LOW_BATTERY_THRESHOLD ]]; then
+  if [[ "$STATE" -eq 1 && "$PCT" -le $LBT ]]; then
     sendNotification "Battery Low. Plug the Charger!"
-    play "/usr/share/sounds/Oxygen-Sys-App-Error-Serious.ogg"
+    play "$SOUND_FILE_LOCATION/Oxygen-Sys-App-Error-Serious.ogg"
   fi
 
-  if [[ $STATE -eq 1 && $PERCENTAGE -ge $FULL_BATTERY_THRESHOLD ]]; then
+  if [[ "$STATE" -eq 0 && "$PCT" -ge $FBT ]]; then
     sendNotification "Battery Full. Unplug the Charger!"
-    play "/usr/share/sounds/Niko-Niko-Nii-SFX.ogg"
+    play "$SOUND_FILE_LOCATION/Niko-Niko-Nii-SFX.ogg"
   fi
 
   sleep 10
 done
-
-# || WARNING: DO NOT EDIT THE CODE ABOVE || #
+COMMENT
