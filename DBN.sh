@@ -116,7 +116,7 @@ fi
 
 
 
-:<<COMMENT
+# :<<COMMENT
 while true
 do
 
@@ -136,4 +136,4 @@ do
 
   sleep 10
 done
-COMMENT
+# COMMENT
