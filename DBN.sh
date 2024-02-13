@@ -49,6 +49,8 @@ fi
 
 # ~ VARIABLES ~ #
 
+:<<COMMENT
+
 LOG_FILE="/home/*/.log/battery-notifier/battery_notifier_log.txt"
 
 logMessage() {
@@ -57,6 +59,8 @@ logMessage() {
 
 # logMessage "YEET"
 # cat $LOG_FILE
+
+COMMENT
 
 
 
